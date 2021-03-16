@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import BlogsList from './components/BlogsList';
+import AddBlog from './components/AddBlog';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [reloadList, setReloadList] = useState(false);
+
+    const handleReload = (status) => {
+        setReloadList(status);
+    }
+
+    return (
+        <div className='App'>
+            <h1>Blog Posts</h1>
+            <AddBlog handleReload={handleReload} />
+            <Router>
+                <BlogsList reload={reloadList} />
+            </Router>
+        </div>
+    );
 }
 
 export default App;
